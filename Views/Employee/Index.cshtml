@@ -1,0 +1,59 @@
+﻿@* @model Employee *@
+@model EmployeeIndexViewModel
+@{
+    // ViewData["Title"] = "Home Page";
+    var photoPath = "~/Imgs/" + (Model.Employee.PhotoPat ?? "download.png");
+}
+
+@{
+       // Layout = "_LayoutAll";
+     ViewBag.Title = "Employee Details";
+}
+<div class="container">
+    <div class="row justify-content-center" style="align-items:center">
+    <h1>@Model.PageTitle</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center" style="align-items:center">
+
+            <div class="card" style="width: 18rem; margin:10px;">
+            <img src="@photoPath" class="card-img-top thumbnailImg" asp-append-version="true" />
+                <div class="card-body">
+                    <h5 class="card-title">Name: @Model.Employee.Name</h5>
+                    <p class="card-text">Department: @Model.Employee.Department</p>
+                    @* <p class="card-text">@employee.Id</p> *@
+         
+                    @* <a href="@Url.Action("Index", "Employee", new {employee.Id})" class="btn btn-primary">View Details</a> *@
+                </div>
+            </div>
+
+        
+    </div>
+</div>
+
+<div class="text-center">
+
+@* 
+    <h1>@Model.PageTitle</h1>
+    <h1>Strongly Typed View</h1>
+@*     <h1 class="display-4">ID: @Model.Id</h1>
+    <h1 class="display-4">Name: @Model.Name</h1> *@
+@*     <h1 class="display-4">ID: @Model.Employee.Id</h1>
+    <h1 class="display-4">Name: @Model.Employee.Name</h1> *@
+
+
+    @* <h1 class="display-4">Name: @Model.Employee.Department</h1> *@
+    @{
+        // var employee = @ViewData["Employee"] as Employee;
+    }
+   @*  <h1>Through ViewData</h1>
+    <h1 class="display-4">ID: @employee.Id</h1>
+    <h1 class="display-4">Name: @employee.Name</h1>
+    <h1>Through ViewBag</h1>
+    <h1 class="display-4">ID: @ViewBag.Employee.Id</h1>
+    <h1 class="display-4">Name: @ViewBag.Employee.Name</h1> *@
+    <a asp-controller="Employee" asp-action="AllEmployees" class="btn btn-primary">Back</a>
+
+</div>

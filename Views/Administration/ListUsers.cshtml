@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ApplicationUser>
+@{
+    ViewBag.Title = "Users List";
+}
+
+
+<div class="container mt-4">
+    <div class="row align-content-center justify-content-center">
+        <h1>All Users</h1>
+        @if (Model.Any())
+        {
+            <div class="mb-4">
+                <a style="width:auto, margin:5px" asp-action="Register" asp-controller="Account" class="btn btn-primary">Add New</a>
+                <a style="width:auto, margin:5px" asp-action="AllEmployees" asp-controller="Employee" class="btn btn-primary">Cancel</a>
+            </div>
+
+            foreach (var user in Model)
+            {
+                <div class="card mb-4">
+                    <div class="card-header">
+                        User Id: @user.Id
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">User Name: @user.UserName</h5>
+                        <form method="post" asp-action="DeleteUser" asp-route-id="@user.Id">
+                            <a asp-action="EditUser" asp-controller="Administration" asp-route-id="@user.Id" class="btn btn-primary">Edit</a>
+                            <span id="confirmDeleteSpan-@user.Id" style="display:none">
+                                <span>Are you sure you want to delete?</span>
+                                <button type="submit" class="btn btn-primary" @* onclick="return confirm('Are you want to delete user: @user.UserName')" *@>Yes</button>
+                                <button type="button" class="btn btn-primary" onclick="confirmDelete('@user.Id', false)">No</button>
+                            </span>
+                             <span id="deleteSpan-@user.Id">
+                                <button type="button" class="btn btn-danger" onclick="confirmDelete('@user.Id', true)">Delete</button>
+                             </span>
+                        </form>                        
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="card">
+                <div class="card-header">
+                    No user created yet
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Use the button to create a user</h5>
+                    <a class="btn btn-primary" asp-action="Register" asp-controller="Employee">Register</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/CustomScript.js"></script>
+}

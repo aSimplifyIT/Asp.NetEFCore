@@ -1,0 +1,49 @@
+﻿@model EditViewModel
+@{
+    var photoPath = "~/Imgs/" + (Model.ExistingPhotoPath ?? "download.png");
+}
+<h1>Update User</h1>
+
+<div class="container">
+    <div class="row align-content-center justify-content-center">
+
+
+<form asp-action="Update" asp-controller="Employee" method="post" enctype="multipart/form-data" style="width: 600px">
+    <div class="mb-3">
+        <label hidden asp-for="Id" class="form-label">Id</label>
+        <input hidden asp-for="Id" type="text" class="form-control" id="exampleInputPassword1" />
+        <span asp-validation-for="Id"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input asp-for="Name" type="text" class="form-control" id="" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Department" class="form-label">Department</label>
+        <select asp-for="Department" asp-items="Html.GetEnumSelectList<Dept>()">
+            <option value="">Please Select</option>
+        </select>
+        <span asp-validation-for="Department"></span>
+    </div>
+
+    <div class="mb-3">
+                <label asp-for="Photo" class="form-label">Change Photo</label>
+                <div class="input-group">
+                    <input multiple asp-for="Photo" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                    @* <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button> *@
+                </div>
+                <span asp-validation-for="Photo"></span>
+    </div>
+    <img src="@photoPath" class="thumbnailImg" asp-append-version="true"/>
+    <div>
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a asp-action="AllEmployees" asp-controller="Employee" class="btn btn-primary">Cancel</a>
+    </div>
+
+
+</form>
+    </div>
+</div>

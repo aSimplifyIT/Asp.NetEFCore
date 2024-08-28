@@ -1,0 +1,15 @@
+﻿
+.btn{
+    width: auto;
+    margin: 2px;
+}
+
+.thumbnailImg {
+    width:auto;
+    height:250px;
+    margin-top:10px;
+}
+.centerDiv {
+
+    top: 50%;
+}

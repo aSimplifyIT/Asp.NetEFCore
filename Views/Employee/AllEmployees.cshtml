@@ -1,0 +1,48 @@
+﻿@model List<Employee>
+
+@{
+    Layout = "_LayoutAll";
+    ViewBag.Title = "Employee List";
+}
+<div class="container">
+
+    <div class="row justify-content-center" style="align-items:center">
+
+
+                @foreach (var employee in Model)
+                {                    
+                    var photoPath = "~/Imgs/" + (employee.PhotoPat ?? "download.png");
+                    <div class="card" style="width: 18rem; margin:10px;">
+                <img src="@photoPath" class="card-img-top thumbnailImg" asp-append-version="true" />
+                <div class="row justify-content-center card-body">
+                            <h5 class="card-title">@employee.Name</h5>
+                            @* <p class="card-text">@employee.Id</p> *@
+                            <a asp-controller="Employee" asp-action="Index" asp-route-id="@employee.Id" class="btn btn-primary" style="width:auto">Details</a>
+                    <a asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-danger" style="width:auto">Delete</a>
+                    <a asp-controller="Employee" asp-action="Update" asp-route-id="@employee.Id" class="btn btn-danger" style="width:auto">Update</a>
+                            @* <a href="@Url.Action("Index", "Employee", new {employee.Id})" class="btn btn-primary">View Details</a> *@
+                        </div>
+                    </div>
+ 
+                }
+                </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (TempData["AlertMessage"] != null)
+        {
+            <text>
+                document.addEventListener('DOMContentLoaded', function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: '@TempData["AlertMessage"]',
+                    });
+                });
+            </text>
+        }
+    </script>
+}
+      

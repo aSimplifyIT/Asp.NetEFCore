@@ -1,0 +1,41 @@
+﻿@model UserClaimsViewModel
+@{
+
+}
+
+<div class="container">
+    <div class="row align-content-center justify-content-center">
+
+        <form asp-action="ManageUserClaims" asp-controller="Administration" method="post" style="width: 600px">
+
+            @* <div asp-validation-summary="All" class="danger"></div> *@
+
+            <div class="mb-3">
+                <h1>Manage User Claims</h1>
+            </div>
+
+            <div class="mb-3">
+
+                @for (int i = 0; i < Model.Claims.Count; i++)
+                {
+                    <div class="form-check">
+                        <input type="hidden" asp-for="@Model.UserId" />
+                        <input type="hidden" asp-for="@Model.Claims[i].ClaimType" />                  
+            
+                        <input class="form-check-input" asp-for="@Model.Claims[i].IsSelected" />
+                        <label class="form-check-label" asp-for="@Model.Claims[i].IsSelected">
+                            @Model.Claims[i].ClaimType
+                        </label>
+                    </div>
+                }
+            </div>
+
+            <div class="mb-3">
+                @*  <button type="submit" value="update" class="btn btn-primary" style="width:auto"/> *@
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a asp-action="EditUser" asp-route-id="@Model.UserId" asp-controller="Administration" class="btn btn-primary">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
